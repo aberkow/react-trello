@@ -1,30 +1,48 @@
 var React = require('react');
 var Card = require('./Cards.jsx');
 
-class CardList extends React.Component {
+class List extends React.Component {
   render(){
-    var cards = <Card />
-    // var titles = [this.props.listConfig[0].listTitle, this.props.listConfig[1].listTitle]
-    // console.log(this.props.listConfig[0].listTitle, 'from list');
-    // var listTitle = titles.map(function(title){
-    //   return title;
-    // });
-
-    //var listTitle;
-    // for (var i = 0; i < 2; i++){
-    //   listTitle = this.props.listConfig[i].listTitle;
-    // }
+    console.log(this.props.listConfig, 'listConfig');
+    console.log(this.props.listConfig[0].listTitle);
+    var cards = <Card cardConfig = {this.props.listConfig.cards}/>
 
     return(
-      <div className = 'card-list'>
-        <h3>{this.props.listConfig.listTitle}</h3>
-        <ul className = 'card-list-ul'>
-          {cards}
-        </ul>
+      <div className = 'list'>
+        <h2>{this.props.boardConfig.listTitle}</h2>
       </div>
     );
   }
 }
+
+
+
+// <div>
+//   <div className = 'list'>
+//     <h3>{this.props.listConfig[0].listTitle}</h3>
+//     <ul className = 'list-ul'>
+//       {cards}
+//     </ul>
+//   </div>
+//   <div className = 'list'>
+//     <h3>{this.props.listConfig[1].listTitle}</h3>
+//     <ul className = 'list-ul'>
+//       {cards}
+//     </ul>
+//   </div>
+// </div>
+
+// var titles = [this.props.listConfig[0].listTitle, this.props.listConfig[1].listTitle]
+// console.log(this.props.listConfig[0].listTitle, 'from list');
+// var listTitle = titles.map(function(title){
+//   return title;
+// });
+
+//var listTitle;
+// for (var i = 0; i < 2; i++){
+//   listTitle = this.props.listConfig[i].listTitle;
+// }
+
 
 
 // var CardList = React.createClass({
@@ -68,4 +86,4 @@ class CardList extends React.Component {
 //   </div>
 // }
 
-module.exports = CardList;
+module.exports = List;

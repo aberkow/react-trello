@@ -56,7 +56,7 @@
 	
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(38);
-	var Board = __webpack_require__(171);
+	var Board = __webpack_require__(168);
 	
 	//you can pass in props as an object either here as a var
 	//or in the render function before the return.
@@ -115,7 +115,7 @@
 	}(React.Component);
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	  ReactDOM.render(React.createElement(Container, null), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(Container, { appProps: boardConfig }), document.getElementById('app'));
 	});
 
 /***/ },
@@ -20387,10 +20387,7 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20404,7 +20401,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(1);
-	var CardList = __webpack_require__(172);
+	var List = __webpack_require__(169);
 	
 	var Board = function (_React$Component) {
 	  _inherits(Board, _React$Component);
@@ -20420,7 +20417,7 @@
 	    value: function render() {
 	      console.log(this.props);
 	      var boardTitle = this.props.boardConfig.boardTitle;
-	      var list = React.createElement(CardList, { listConfig: this.props.boardConfig.lists });
+	      //var list = <List listConfig = {this.props.boardConfig.lists}/>
 	      // var list = [];
 	      // for (var i = 0; i < 2; i++){
 	      //   list.push(<CardList listTitle = {this.props.boardConfig.lists[i].listTitle}/>);
@@ -20433,8 +20430,7 @@
 	          null,
 	          boardTitle
 	        ),
-	        list,
-	        list
+	        React.createElement(List, { listConfig: this.props.boardConfig.lists })
 	      );
 	    }
 	  }]);
@@ -20461,7 +20457,7 @@
 	// });
 
 /***/ },
-/* 172 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20475,51 +20471,72 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(1);
-	var Card = __webpack_require__(173);
+	var Card = __webpack_require__(170);
 	
-	var CardList = function (_React$Component) {
-	  _inherits(CardList, _React$Component);
+	var List = function (_React$Component) {
+	  _inherits(List, _React$Component);
 	
-	  function CardList() {
-	    _classCallCheck(this, CardList);
+	  function List() {
+	    _classCallCheck(this, List);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CardList).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(List).apply(this, arguments));
 	  }
 	
-	  _createClass(CardList, [{
+	  _createClass(List, [{
 	    key: 'render',
 	    value: function render() {
+	      console.log(this.props.listConfig, 'listConfig');
+	      console.log(this.props.listConfig[0].listTitle);
 	      var cards = React.createElement(Card, null);
-	      // var titles = [this.props.listConfig[0].listTitle, this.props.listConfig[1].listTitle]
-	      // console.log(this.props.listConfig[0].listTitle, 'from list');
-	      // var listTitle = titles.map(function(title){
-	      //   return title;
-	      // });
-	
-	      //var listTitle;
-	      // for (var i = 0; i < 2; i++){
-	      //   listTitle = this.props.listConfig[i].listTitle;
-	      // }
-	
+	      //var list1Props = this.props.boardConfig.lists[0];
 	      return React.createElement(
 	        'div',
-	        { className: 'card-list' },
+	        null,
 	        React.createElement(
-	          'h3',
-	          null,
-	          this.props.listConfig.listTitle
+	          'div',
+	          { className: 'list' },
+	          React.createElement(
+	            'h3',
+	            null,
+	            this.props.listConfig[0].listTitle
+	          ),
+	          React.createElement(
+	            'ul',
+	            { className: 'list-ul' },
+	            cards
+	          )
 	        ),
 	        React.createElement(
-	          'ul',
-	          { className: 'card-list-ul' },
-	          cards
+	          'div',
+	          { className: 'list' },
+	          React.createElement(
+	            'h3',
+	            null,
+	            this.props.listConfig[1].listTitle
+	          ),
+	          React.createElement(
+	            'ul',
+	            { className: 'list-ul' },
+	            cards
+	          )
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return CardList;
+	  return List;
 	}(React.Component);
+	
+	// var titles = [this.props.listConfig[0].listTitle, this.props.listConfig[1].listTitle]
+	// console.log(this.props.listConfig[0].listTitle, 'from list');
+	// var listTitle = titles.map(function(title){
+	//   return title;
+	// });
+	
+	//var listTitle;
+	// for (var i = 0; i < 2; i++){
+	//   listTitle = this.props.listConfig[i].listTitle;
+	// }
 	
 	// var CardList = React.createClass({
 	//   render: function(){
@@ -20562,10 +20579,10 @@
 	//   </div>
 	// }
 	
-	module.exports = CardList;
+	module.exports = List;
 
 /***/ },
-/* 173 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

@@ -4,6 +4,7 @@ var Board = require('./components/Board');
 
 //you can pass in props as an object either here as a var
 //or in the render function before the return.
+//!!!!!!!!!Important - pass these props to the Container in ReactDOM.render at the botom.
 var boardConfig = {
   boardTitle: 'Board title',
   lists: [
@@ -23,21 +24,7 @@ var boardConfig = {
 class Container extends React.Component {
   //initialization function.
   render(){
-    // const boardConfig = {
-    //   boardTitle: 'Board title',
-    //   lists: [
-    //     {
-    //       listTitle: 'List 1 title',
-    //       cards: ['Card 1', 'Card 2', 'Card 3']
-    //     },
-    //     {
-    //       listTitle: 'List 2 title',
-    //       cards: ['Card A', 'Card B', 'Card C']
-    //     }
-    //   ]
-    // };
-
-    var board = <Board boardConfig = {boardConfig}/>;
+    var board = <Board boardConfig = this.props />
     return (
       <div className='container'>
         {board}
@@ -47,5 +34,5 @@ class Container extends React.Component {
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-  ReactDOM.render(<Container/>, document.getElementById('app'));
+  ReactDOM.render(<Container appProps = {boardConfig}/>, document.getElementById('app'));
 });

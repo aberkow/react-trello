@@ -15,6 +15,7 @@ var ReactDOM = require('react-dom');
 // });
 
 function Card(props) {
+    console.log(this.props.cardConfig, 'cardConfig');
   var cards = [];
 
   return (
