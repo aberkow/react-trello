@@ -1,19 +1,19 @@
-var React = require('react');
-var Card = require('./Cards.jsx');
-
-class List extends React.Component {
-  render(){
-    console.log(this.props.listConfig, 'listConfig');
-    console.log(this.props.listConfig[0].listTitle);
-    var cards = <Card cardConfig = {this.props.listConfig.cards}/>
-
-    return(
-      <div className = 'list'>
-        <h2>{this.props.boardConfig.listTitle}</h2>
-      </div>
-    );
-  }
-}
+// var React = require('react');
+// var Card = require('./Cards.jsx');
+//
+// class List extends React.Component {
+//   render(){
+//     console.log(this.props.listConfig, 'listConfig');
+//     console.log(this.props.listConfig[0].listTitle);
+//     var cards = <Card cardConfig = {this.props.listConfig.cards}/>
+//
+//     return(
+//       <div className = 'list'>
+//         //<h2>{this.props.boardConfig.listTitle}</h2>
+//       </div>
+//     );
+//   }
+// }
 
 
 

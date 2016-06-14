@@ -1,27 +1,30 @@
-var React = require('react');
-var List = require('./List.jsx')
-
-class Board extends React.Component {
-  render(){
-    console.log(this.props);
-    var boardTitle = this.props.boardConfig.boardTitle;
-    return (
-      <div className = 'board'>
-        <h1>{boardTitle}</h1>
-        <div className = 'list__container'>
-          this.props.boardConfig.lists.map(function(list, index){
-            return (
-              title = {list.listTitle}
-              cards = {list.cards}
-            )
-          });
-        </div>
-      </div>
-    );
-  }
-}
-
-module.exports = Board;
+// var React = require('react');
+// var List = require('./List.jsx')
+//
+// class Board extends React.Component {
+//   constructor(){
+//     super();
+//   }
+//   render(){
+//     console.log(this.props);
+//     var boardTitle = this.props.boardConfig.boardTitle;
+//     return (
+//       //<div className = 'board'>
+//         // <h1>{boardTitle}</h1>
+//         // <div className = 'list__container'>
+//         //   this.props.boardConfig.lists.map(function(list, index){
+//         //     return (
+//         //       title = {list.listTitle}
+//         //       cards = {list.cards}
+//         //     )
+//         //   });
+//         // </div>
+//       //</div>
+//     );
+//   }
+// }
+//
+// module.exports = Board;
 
 
 

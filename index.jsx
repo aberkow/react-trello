@@ -19,20 +19,52 @@ var boardConfig = {
   ]
 };
 
-//recieves two attibutes -
-//look up class decoration- redux connect.
 class Container extends React.Component {
-  //initialization function.
+  constructor (props){
+    super(props);
+  }
+
   render(){
-    var board = <Board boardConfig = this.props />
-    return (
+    console.log(this.props);
+    return(
       <div className='container'>
-        {board}
+
       </div>
-    );
+    )
   }
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-  ReactDOM.render(<Container appProps = {boardConfig}/>, document.getElementById('app'));
+  ReactDOM.render(<Container boardConfig={boardConfig} />, document.getElementById('app'));
 });
+
+
+
+
+
+
+
+
+//recieves two attibutes -
+//look up class decoration- redux connect.
+// class Container extends React.Component {
+//   //initialization function.
+//   constructor(props){
+//     super(props);
+//     this.state = {
+//       boardConfig
+//     };
+//   }
+//   render(){
+//     var board = <Board boardConfig = {this.props} />
+//     return (
+//       <div className='container'>
+//         {board}
+//       </div>
+//     );
+//   }
+// }
+//
+// document.addEventListener('DOMContentLoaded', function(){
+//   ReactDOM.render(<Container appProps = {boardConfig}/>, document.getElementById('app'));
+// });
