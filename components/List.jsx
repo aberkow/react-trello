@@ -14,7 +14,7 @@ class List extends React.Component {
           <ul className='cards__list'>
             {this.props.cardInfo.map(function(card, index){
               console.log(index, card);
-              return <Card info = {index[card]} key = {index} />
+              return <Card info = {card} key = {index} />
             })}
           </ul>
         </div>

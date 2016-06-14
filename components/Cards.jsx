@@ -7,9 +7,7 @@ class Card extends React.Component{
   render(){
     console.log(this.props, 'from cards');
     return(
-      <div className='card'>
-        <p className='card__info'></p>
-      </div>
+      <li className='card'>{this.props.info}</li>  
     );
   }
 }
@@ -17,7 +15,9 @@ class Card extends React.Component{
 module.exports = Card;
 
 
-
+// <div className='card'>
+//   <p className='card__info'>{this.props.info}</p>
+// </div>
 
 // var ReactDOM = require('react-dom');
 //

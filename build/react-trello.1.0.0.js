@@ -20438,7 +20438,6 @@
 	          'div',
 	          { className: 'list__container' },
 	          this.props.config.lists.map(function (list, index) {
-	            console.log(index, 'the index');
 	            return React.createElement(List, { title: list.listTitle, key: index, cardInfo: list.cards });
 	          })
 	        )
@@ -20510,7 +20509,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(1);
-	var Cards = __webpack_require__(170);
+	var Card = __webpack_require__(170);
 	
 	var List = function (_React$Component) {
 	  _inherits(List, _React$Component);
@@ -20536,9 +20535,14 @@
 	        React.createElement(
 	          'div',
 	          { className: 'cards__container' },
-	          this.props.cardInfo.map(function (card, index) {
-	            console.log(index, card);
-	          })
+	          React.createElement(
+	            'ul',
+	            { className: 'cards__list' },
+	            this.props.cardInfo.map(function (card, index) {
+	              console.log(index, card);
+	              return React.createElement(Card, { info: card, key: index });
+	            })
+	          )
 	        )
 	      );
 	    }
@@ -20669,7 +20673,11 @@
 	    key: 'render',
 	    value: function render() {
 	      console.log(this.props, 'from cards');
-	      return React.createElement('div', { className: 'card' });
+	      return React.createElement(
+	        'li',
+	        { className: 'card' },
+	        this.props.info
+	      );
 	    }
 	  }]);
 	
@@ -20678,6 +20686,10 @@
 	
 	module.exports = Card;
 	
+	// <div className='card'>
+	//   <p className='card__info'>{this.props.info}</p>
+	// </div>
+
 	// var ReactDOM = require('react-dom');
 	//
 	// // var Card = React.createClass({
