@@ -1,4 +1,5 @@
 var React = require('react');
+var Card = require('./Cards');
 
 class List extends React.Component {
   constructor(){
@@ -8,13 +9,24 @@ class List extends React.Component {
     console.log(this.props, 'from List');
     return(
       <div className='list'>
-        
+        <h2 className='list__title'>{this.props.title}</h2>
+        <div className='cards__container'>
+          <ul className='cards__list'>
+            {this.props.cardInfo.map(function(card, index){
+              console.log(index, card);
+              return <Card info = {index[card]} key = {index} />
+            })}
+          </ul>
+        </div>
       </div>
     );
   }
 }
 
 module.exports = List;
+
+// <Cards cardInfo = {this.props.cardInfo} />
+
 
 //         //   this.props.boardConfig.lists.map(function(list, index){
 //         //     return (

@@ -1,4 +1,24 @@
-// var React = require('react');
+var React = require('react');
+
+class Card extends React.Component{
+  constructor(){
+    super();
+  }
+  render(){
+    console.log(this.props, 'from cards');
+    return(
+      <div className='card'>
+        <p className='card__info'></p>
+      </div>
+    );
+  }
+}
+
+module.exports = Card;
+
+
+
+
 // var ReactDOM = require('react-dom');
 //
 // // var Card = React.createClass({

@@ -14,7 +14,7 @@ class Board extends React.Component {
         <h1 className='boardTitle'>{boardTitle}</h1>
         <div className='list__container'>
           {this.props.config.lists.map(function(list, index){
-            return <List title = {list.listTitle} />
+            return <List title = {list.listTitle} key = {index} cardInfo = {list.cards}/>
           })}
 
         </div>
