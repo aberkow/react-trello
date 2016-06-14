@@ -5,7 +5,7 @@ class Board extends React.Component {
   render(){
     console.log(this.props);
     var boardTitle = this.props.boardConfig.boardTitle;
-    var list = <CardList listConfig = {this.props.boardConfig.lists}/>
+    // var list = <CardList listConfig = {this.props.boardConfig.lists}/>
     // var list = [];
     // for (var i = 0; i < 2; i++){
     //   list.push(<CardList listTitle = {this.props.boardConfig.lists[i].listTitle}/>);
@@ -13,8 +13,10 @@ class Board extends React.Component {
     return (
       <div className = 'board'>
         <h2>{boardTitle}</h2>
-        {list}
-        {list}
+        // {list}
+        // {list}
+        <CardList listTitle = this.props.boardConfig.lists[0] />
+        <CardList listTitle = this.props.boardConfig.lists[1].listTitle />
       </div>
     );
   }

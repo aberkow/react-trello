@@ -17,7 +17,7 @@ class CardList extends React.Component {
 
     return(
       <div className = 'card-list'>
-        <h3>{this.props.listConfig.listTitle}</h3>
+        <h3>{this.props.listTitle}</h3>
         <ul className = 'card-list-ul'>
           {cards}
         </ul>
