@@ -1,4 +1,32 @@
-// var React = require('react');
+var React = require('react');
+var List = require('./List');
+
+class Board extends React.Component {
+  constructor(){
+    super();
+  }
+  render(){
+    console.log(this.props, 'from board');
+    var boardTitle = this.props.config.boardTitle;
+    //var lists = this.props.config.lists;
+    return(
+      <div className='board'>
+        <h1 className='boardTitle'>{boardTitle}</h1>
+        <div className='list__container'>
+          {this.props.config.lists.map(function(list, index){
+            return <List title = {list.listTitle} />
+          })}
+
+        </div>
+      </div>
+    );
+  }
+}
+
+module.exports = Board;
+
+
+// <List config={this.props.config.lists} />
 // var List = require('./List.jsx')
 //
 // class Board extends React.Component {
@@ -12,11 +40,11 @@
 //       //<div className = 'board'>
 //         // <h1>{boardTitle}</h1>
 //         // <div className = 'list__container'>
-//         //   this.props.boardConfig.lists.map(function(list, index){
-//         //     return (
-//         //       title = {list.listTitle}
-//         //       cards = {list.cards}
-//         //     )
+  //         //   this.props.boardConfig.lists.map(function(list, index){
+  //         //     return (
+  //         //       title = {list.listTitle}
+  //         //       cards = {list.cards}
+  //         //     )
 //         //   });
 //         // </div>
 //       //</div>

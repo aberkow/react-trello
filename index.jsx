@@ -28,7 +28,7 @@ class Container extends React.Component {
     console.log(this.props);
     return(
       <div className='container'>
-
+        <Board config={this.props.boardConfig}/>
       </div>
     )
   }
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function(){
   ReactDOM.render(<Container boardConfig={boardConfig} />, document.getElementById('app'));
 });
 
-
+// <Board boardConfig={this.props} />
 
 
 

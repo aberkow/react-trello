@@ -1,4 +1,28 @@
-// var React = require('react');
+var React = require('react');
+
+class List extends React.Component {
+  constructor(){
+    super();
+  }
+  render(){
+    console.log(this.props, 'from List');
+    return(
+      <div className='list'>
+        
+      </div>
+    );
+  }
+}
+
+module.exports = List;
+
+//         //   this.props.boardConfig.lists.map(function(list, index){
+//         //     return (
+//         //       title = {list.listTitle}
+//         //       cards = {list.cards}
+//         //     )
+
+
 // var Card = require('./Cards.jsx');
 //
 // class List extends React.Component {
@@ -85,5 +109,3 @@
 //     </ul>
 //   </div>
 // }
-
-module.exports = List;
