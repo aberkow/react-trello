@@ -1,5 +1,6 @@
 var React = require('react');
 var Card = require('./Cards');
+var Input = require('./InputItem');
 
 class List extends React.Component {
   constructor(){
@@ -18,6 +19,7 @@ class List extends React.Component {
             })}
           </ul>
         </div>
+        <Input />  
       </div>
     );
   }

@@ -22,8 +22,15 @@ var boardConfig = {
 class Container extends React.Component {
   constructor (props){
     super(props);
+    this.onAddInputChanged = this.onAddInputChanged.bind(this);
+    this.onAddClick = this.onAddClick.bind(this);
   }
+  onAddInputChanged(){
 
+  }
+  onAddClick(){
+
+  }
   render(){
     console.log(this.props);
     return(
