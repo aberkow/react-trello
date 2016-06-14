@@ -56,10 +56,11 @@
 	
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(38);
-	var Board = __webpack_require__(171);
+	var Board = __webpack_require__(168);
 	
 	//you can pass in props as an object either here as a var
 	//or in the render function before the return.
+	//!!!!!!!!!Important - pass these props to the Container in ReactDOM.render at the botom.
 	var boardConfig = {
 	  boardTitle: 'Board title',
 	  lists: [{
@@ -71,42 +72,23 @@
 	  }]
 	};
 	
-	//recieves two attibutes -
-	//look up class decoration- redux connect.
-	
 	var Container = function (_React$Component) {
 	  _inherits(Container, _React$Component);
 	
-	  function Container() {
+	  function Container(props) {
 	    _classCallCheck(this, Container);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Container).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Container).call(this, props));
 	  }
 	
 	  _createClass(Container, [{
 	    key: 'render',
-	
-	    //initialization function.
 	    value: function render() {
-	      // const boardConfig = {
-	      //   boardTitle: 'Board title',
-	      //   lists: [
-	      //     {
-	      //       listTitle: 'List 1 title',
-	      //       cards: ['Card 1', 'Card 2', 'Card 3']
-	      //     },
-	      //     {
-	      //       listTitle: 'List 2 title',
-	      //       cards: ['Card A', 'Card B', 'Card C']
-	      //     }
-	      //   ]
-	      // };
-	
-	      var board = React.createElement(Board, { boardConfig: boardConfig });
+	      console.log(this.props);
 	      return React.createElement(
 	        'div',
 	        { className: 'container' },
-	        board
+	        React.createElement(Board, { config: this.props.boardConfig })
 	      );
 	    }
 	  }]);
@@ -115,8 +97,34 @@
 	}(React.Component);
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	  ReactDOM.render(React.createElement(Container, null), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(Container, { boardConfig: boardConfig }), document.getElementById('app'));
 	});
+	
+	// <Board boardConfig={this.props} />
+
+	//recieves two attibutes -
+	//look up class decoration- redux connect.
+	// class Container extends React.Component {
+	//   //initialization function.
+	//   constructor(props){
+	//     super(props);
+	//     this.state = {
+	//       boardConfig
+	//     };
+	//   }
+	//   render(){
+	//     var board = <Board boardConfig = {this.props} />
+	//     return (
+	//       <div className='container'>
+	//         {board}
+	//       </div>
+	//     );
+	//   }
+	// }
+	//
+	// document.addEventListener('DOMContentLoaded', function(){
+	//   ReactDOM.render(<Container appProps = {boardConfig}/>, document.getElementById('app'));
+	// });
 
 /***/ },
 /* 1 */
@@ -20387,10 +20395,7 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20404,7 +20409,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(1);
-	var CardList = __webpack_require__(172);
+	var List = __webpack_require__(169);
 	
 	var Board = function (_React$Component) {
 	  _inherits(Board, _React$Component);
@@ -20412,29 +20417,30 @@
 	  function Board() {
 	    _classCallCheck(this, Board);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Board).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Board).call(this));
 	  }
 	
 	  _createClass(Board, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props);
-	      var boardTitle = this.props.boardConfig.boardTitle;
-	      var list = React.createElement(CardList, { listConfig: this.props.boardConfig.lists });
-	      // var list = [];
-	      // for (var i = 0; i < 2; i++){
-	      //   list.push(<CardList listTitle = {this.props.boardConfig.lists[i].listTitle}/>);
-	      // }
+	      console.log(this.props, 'from board');
+	      var boardTitle = this.props.config.boardTitle;
+	      //var lists = this.props.config.lists;
 	      return React.createElement(
 	        'div',
 	        { className: 'board' },
 	        React.createElement(
-	          'h2',
-	          null,
+	          'h1',
+	          { className: 'boardTitle' },
 	          boardTitle
 	        ),
-	        list,
-	        list
+	        React.createElement(
+	          'div',
+	          { className: 'list__container' },
+	          this.props.config.lists.map(function (list, index) {
+	            return React.createElement(List, { title: list.listTitle, key: index, cardInfo: list.cards });
+	          })
+	        )
 	      );
 	    }
 	  }]);
@@ -20444,6 +20450,34 @@
 	
 	module.exports = Board;
 	
+	// <List config={this.props.config.lists} />
+	// var List = require('./List.jsx')
+	//
+	// class Board extends React.Component {
+	//   constructor(){
+	//     super();
+	//   }
+	//   render(){
+	//     console.log(this.props);
+	//     var boardTitle = this.props.boardConfig.boardTitle;
+	//     return (
+	//       //<div className = 'board'>
+	//         // <h1>{boardTitle}</h1>
+	//         // <div className = 'list__container'>
+	//         //   this.props.boardConfig.lists.map(function(list, index){
+	//         //     return (
+	//         //       title = {list.listTitle}
+	//         //       cards = {list.cards}
+	//         //     )
+	//         //   });
+	//         // </div>
+	//       //</div>
+	//     );
+	//   }
+	// }
+	//
+	// module.exports = Board;
+
 	// var Board = React.createClass({
 	//   render(){
 	//     var boardTitle = this.props.boardConfig.boardTitle;
@@ -20461,7 +20495,7 @@
 	// });
 
 /***/ },
-/* 172 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20475,52 +20509,100 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(1);
-	var Card = __webpack_require__(173);
+	var Card = __webpack_require__(170);
 	
-	var CardList = function (_React$Component) {
-	  _inherits(CardList, _React$Component);
+	var List = function (_React$Component) {
+	  _inherits(List, _React$Component);
 	
-	  function CardList() {
-	    _classCallCheck(this, CardList);
+	  function List() {
+	    _classCallCheck(this, List);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CardList).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(List).call(this));
 	  }
 	
-	  _createClass(CardList, [{
+	  _createClass(List, [{
 	    key: 'render',
 	    value: function render() {
-	      var cards = React.createElement(Card, null);
-	      // var titles = [this.props.listConfig[0].listTitle, this.props.listConfig[1].listTitle]
-	      // console.log(this.props.listConfig[0].listTitle, 'from list');
-	      // var listTitle = titles.map(function(title){
-	      //   return title;
-	      // });
-	
-	      //var listTitle;
-	      // for (var i = 0; i < 2; i++){
-	      //   listTitle = this.props.listConfig[i].listTitle;
-	      // }
-	
+	      console.log(this.props, 'from List');
 	      return React.createElement(
 	        'div',
-	        { className: 'card-list' },
+	        { className: 'list' },
 	        React.createElement(
-	          'h3',
-	          null,
-	          this.props.listConfig.listTitle
+	          'h2',
+	          { className: 'list__title' },
+	          this.props.title
 	        ),
 	        React.createElement(
-	          'ul',
-	          { className: 'card-list-ul' },
-	          cards
+	          'div',
+	          { className: 'cards__container' },
+	          React.createElement(
+	            'ul',
+	            { className: 'cards__list' },
+	            this.props.cardInfo.map(function (card, index) {
+	              console.log(index, card);
+	              return React.createElement(Card, { info: card, key: index });
+	            })
+	          )
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return CardList;
+	  return List;
 	}(React.Component);
 	
+	module.exports = List;
+	
+	// <Cards cardInfo = {this.props.cardInfo} />
+
+	//         //   this.props.boardConfig.lists.map(function(list, index){
+	//         //     return (
+	//         //       title = {list.listTitle}
+	//         //       cards = {list.cards}
+	//         //     )
+
+	// var Card = require('./Cards.jsx');
+	//
+	// class List extends React.Component {
+	//   render(){
+	//     console.log(this.props.listConfig, 'listConfig');
+	//     console.log(this.props.listConfig[0].listTitle);
+	//     var cards = <Card cardConfig = {this.props.listConfig.cards}/>
+	//
+	//     return(
+	//       <div className = 'list'>
+	//         //<h2>{this.props.boardConfig.listTitle}</h2>
+	//       </div>
+	//     );
+	//   }
+	// }
+
+	// <div>
+	//   <div className = 'list'>
+	//     <h3>{this.props.listConfig[0].listTitle}</h3>
+	//     <ul className = 'list-ul'>
+	//       {cards}
+	//     </ul>
+	//   </div>
+	//   <div className = 'list'>
+	//     <h3>{this.props.listConfig[1].listTitle}</h3>
+	//     <ul className = 'list-ul'>
+	//       {cards}
+	//     </ul>
+	//   </div>
+	// </div>
+
+	// var titles = [this.props.listConfig[0].listTitle, this.props.listConfig[1].listTitle]
+	// console.log(this.props.listConfig[0].listTitle, 'from list');
+	// var listTitle = titles.map(function(title){
+	//   return title;
+	// });
+
+	//var listTitle;
+	// for (var i = 0; i < 2; i++){
+	//   listTitle = this.props.listConfig[i].listTitle;
+	// }
+
 	// var CardList = React.createClass({
 	//   render: function(){
 	//     //var list = [];
@@ -20552,7 +20634,7 @@
 	//     );
 	//   }
 	// });
-	
+
 	// function CardList(props) {
 	//   <div className = 'card-list'>
 	//     <h3>props.title</h3>
@@ -20561,42 +20643,81 @@
 	//     </ul>
 	//   </div>
 	// }
-	
-	module.exports = CardList;
 
 /***/ },
-/* 173 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
 	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(38);
 	
-	// var Card = React.createClass({
-	//   render: function(){
-	//     var todoItem = 'todo';
-	//     //var completed = false;
-	//     //var date = new Date();
-	//     return (
-	//       <li className='card'>
-	//         {todoItem}
-	//       </li>
-	//     );
-	//   }
-	// });
+	var Card = function (_React$Component) {
+	  _inherits(Card, _React$Component);
 	
-	function Card(props) {
-	  var cards = [];
+	  function Card() {
+	    _classCallCheck(this, Card);
 	
-	  return React.createElement(
-	    'li',
-	    { className: 'card' },
-	    props.cards
-	  );
-	}
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Card).call(this));
+	  }
+	
+	  _createClass(Card, [{
+	    key: 'render',
+	    value: function render() {
+	      console.log(this.props, 'from cards');
+	      return React.createElement(
+	        'li',
+	        { className: 'card' },
+	        this.props.info
+	      );
+	    }
+	  }]);
+	
+	  return Card;
+	}(React.Component);
 	
 	module.exports = Card;
+	
+	// <div className='card'>
+	//   <p className='card__info'>{this.props.info}</p>
+	// </div>
+
+	// var ReactDOM = require('react-dom');
+	//
+	// // var Card = React.createClass({
+	// //   render: function(){
+	// //     var todoItem = 'todo';
+	// //     //var completed = false;
+	// //     //var date = new Date();
+	// //     return (
+	// //       <li className='card'>
+	// //         {todoItem}
+	// //       </li>
+	// //     );
+	// //   }
+	// // });
+	//
+	// function Card(props) {
+	//     console.log(this.props.cardConfig, 'cardConfig');
+	//   var cards = [];
+	//
+	//   return (
+	//
+	//     <li className = 'card'>
+	//       {props.cards}
+	//     </li>
+	//   );
+	// }
+	//
+	// module.exports = Card;
 
 /***/ }
 /******/ ]);
