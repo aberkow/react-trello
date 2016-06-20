@@ -80,6 +80,9 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Container).call(this, props));
 	
+	    _this.state = {
+	      itemText: ' '
+	    };
 	    _this.onAddInputChanged = _this.onAddInputChanged.bind(_this);
 	    _this.onAddClick = _this.onAddClick.bind(_this);
 	    return _this;
@@ -87,14 +90,21 @@
 	
 	  _createClass(Container, [{
 	    key: 'onAddInputChanged',
-	    value: function onAddInputChanged() {}
+	    value: function onAddInputChanged(evt) {
+	      console.log(this);
+	      this.setState({ itemText: evt.target.value });
+	    }
 	  }, {
 	    key: 'onAddClick',
-	    value: function onAddClick() {}
+	    value: function onAddClick(evt) {
+	      evt.preventDefault();
+	      console.log('click');
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props);
+	      console.log(this.state, 'from index');
+	      console.log(this.props, 'from index');
 	      return React.createElement(
 	        'div',
 	        { className: 'container' },
@@ -107,10 +117,29 @@
 	}(React.Component);
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	  ReactDOM.render(React.createElement(Container, { boardConfig: boardConfig }), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(Container, { boardConfig: boardConfig, changeHandler: this.onAddInputChanged, clickHandler: this.onAddClick }), document.getElementById('app'));
 	});
 	
-	// <Board boardConfig={this.props} />
+	// <Board boardConfig={this.props} /> itemText={this.state.itemText}
+
+	/*
+	this.state = {
+	  itemText: props.initialItemText,
+	  inputButtonClicked: false,
+	 }
+	this.onAddInputChanged = this.onAddInputChanged.bind(this);
+	// this.onAddClick = this.onAddClick.bind(this);
+
+	}
+	*/
+	/*
+	onAddInputChanged(evt){
+	this.setState({itemText: evt.target.value});
+	}
+	// onAddClick(){
+	//
+	// }
+	*/
 
 	//recieves two attibutes -
 	//look up class decoration- redux connect.
@@ -20433,9 +20462,8 @@
 	  _createClass(Board, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props, 'from board');
+	      /*console.log(this.props, 'from Board');*/
 	      var boardTitle = this.props.config.boardTitle;
-	      //var lists = this.props.config.lists;
 	      return React.createElement(
 	        'div',
 	        { className: 'board' },
@@ -20460,6 +20488,34 @@
 	
 	module.exports = Board;
 	
+	/*
+	var React = require('react');
+	var List = require('./List');
+
+	class Board extends React.Component {
+	  constructor(){
+	    super();
+	  }
+	  render(){
+	    console.log(this.props, 'from board');
+	    var boardTitle = this.props.config.boardTitle;
+	    //var lists = this.props.config.lists;
+	    return(
+	      <div className='board'>
+	        <h1 className='boardTitle'>{boardTitle}</h1>
+	        <div className='list__container'>
+	          {this.props.config.lists.map(function(list, index){
+	            return <List title = {list.listTitle} key = {index} cardInfo = {list.cards}/>
+	          })}
+	        </div>
+	      </div>
+	    );
+	  }
+	}
+
+	module.exports = Board;
+	*/
+
 	// <List config={this.props.config.lists} />
 	// var List = require('./List.jsx')
 	//
@@ -20534,7 +20590,7 @@
 	  _createClass(List, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props, 'from List');
+	      /*console.log(this.props, 'from List');*/
 	      return React.createElement(
 	        'div',
 	        { className: 'list' },
@@ -20555,7 +20611,7 @@
 	            })
 	          )
 	        ),
-	        React.createElement(Input, null)
+	        React.createElement(Input, { config: this.props })
 	      );
 	    }
 	  }]);
@@ -20565,6 +20621,39 @@
 	
 	module.exports = List;
 	
+	// <Input config={this.props} />
+	/*
+	var React = require('react');
+	var Card = require('./Cards');
+	//var Input = require('./InputItem');
+
+	class List extends React.Component {
+	  constructor(){
+	    super();
+	  }
+	  render(){
+	    console.log(this.props, 'from List');
+	    return(
+	      <div className='list'>
+	        <h2 className='list__title'>{this.props.title}</h2>
+	        <div className='cards__container'>
+	          <ul className='cards__list'>
+	            {this.props.cardInfo.map(function(card, index){
+	              console.log(index, card);
+	              return <Card info = {card} key = {index} />
+	            })}
+	          </ul>
+	        </div>
+	        /*<Input config={this.props}/>  */
+	/*
+	      </div>
+	    );
+	  }
+	}
+
+	module.exports = List;
+	*/
+
 	// <Cards cardInfo = {this.props.cardInfo} />
 
 	//         //   this.props.boardConfig.lists.map(function(list, index){
@@ -20684,7 +20773,7 @@
 	  _createClass(Card, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props, 'from cards');
+	      /*console.log(this.props, 'from cards');*/
 	      return React.createElement(
 	        'li',
 	        { className: 'card' },
@@ -20698,6 +20787,24 @@
 	
 	module.exports = Card;
 	
+	/*
+	var React = require('react');
+
+	class Card extends React.Component{
+	  constructor(){
+	    super();
+	  }
+	  render(){
+	    console.log(this.props, 'from cards');
+	    return(
+	      <li className='card'>{this.props.info}</li>
+	    );
+	  }
+	}
+
+	module.exports = Card;
+	*/
+
 	// <div className='card'>
 	//   <p className='card__info'>{this.props.info}</p>
 	// </div>
@@ -20759,15 +20866,25 @@
 	  _createClass(Input, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props, 'from input');
+	      /*console.log(this.props, 'from Input');
+	      let { itemText } = this.state;*/
 	      return React.createElement(
 	        'div',
 	        { className: 'input' },
-	        React.createElement('input', { type: 'text', className: 'list__input' }),
 	        React.createElement(
-	          'button',
-	          null,
-	          'test'
+	          'form',
+	          { className: 'input__form' },
+	          React.createElement('input', { type: 'text',
+	            className: 'input__form-box',
+	            placeholder: 'Add a task',
+	
+	            onChange: this.onAddInputChanged
+	
+	          }),
+	          React.createElement('input', { type: 'submit',
+	            className: 'input__form-submit',
+	            onClick: this.onAddClick
+	          })
 	        )
 	      );
 	    }
@@ -20777,6 +20894,36 @@
 	}(React.Component);
 	
 	module.exports = Input;
+	
+	/*
+	value={itemText}
+	var React = require('react');
+
+	class Input extends React.Component{
+	  constructor(){
+	    super();
+	  }
+	  render(){
+	    console.log(this.props, 'from input');
+	    return(
+	      <div className='input'>
+	        <form className='input__form' >
+	          <input type='text'
+	            className='list__input'
+	            placeholder='Add a task'
+	            value={this.state.itemText}
+	            onChange={this.onAddInputChanged}
+	             />
+	           <input type='submit'
+	             className='list__input-submit' />
+	        </form>
+	      </div>
+	    );
+	  }
+	}
+
+	module.exports = Input;
+	*/
 
 /***/ }
 /******/ ]);

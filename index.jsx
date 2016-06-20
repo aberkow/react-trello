@@ -22,17 +22,23 @@ var boardConfig = {
 class Container extends React.Component {
   constructor (props){
     super(props);
+    this.state = {
+      itemText: ' ',
+    };
     this.onAddInputChanged = this.onAddInputChanged.bind(this);
     this.onAddClick = this.onAddClick.bind(this);
   }
-  onAddInputChanged(){
-
+  onAddInputChanged(evt){
+    console.log(this);
+    this.setState({itemText: evt.target.value});
   }
-  onAddClick(){
-
+  onAddClick(evt){
+    evt.preventDefault();
+    console.log('click');
   }
   render(){
-    console.log(this.props);
+    console.log(this.state, 'from index');
+    console.log(this.props, 'from index');
     return(
       <div className='container'>
         <Board config={this.props.boardConfig}/>
@@ -42,12 +48,29 @@ class Container extends React.Component {
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-  ReactDOM.render(<Container boardConfig={boardConfig} />, document.getElementById('app'));
+  ReactDOM.render(<Container boardConfig={boardConfig} changeHandler={this.onAddInputChanged} clickHandler={this.onAddClick} />, document.getElementById('app'));
 });
 
-// <Board boardConfig={this.props} />
+// <Board boardConfig={this.props} /> itemText={this.state.itemText}
 
+/*
+this.state = {
+  itemText: props.initialItemText,
+  inputButtonClicked: false,
+ }
+this.onAddInputChanged = this.onAddInputChanged.bind(this);
+// this.onAddClick = this.onAddClick.bind(this);
 
+}
+*/
+/*
+onAddInputChanged(evt){
+this.setState({itemText: evt.target.value});
+}
+// onAddClick(){
+//
+// }
+*/
 
 
 

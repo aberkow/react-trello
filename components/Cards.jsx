@@ -5,15 +5,32 @@ class Card extends React.Component{
     super();
   }
   render(){
-    console.log(this.props, 'from cards');
+    /*console.log(this.props, 'from cards');*/
     return(
-      <li className='card'>{this.props.info}</li>  
+      <li className='card'>{this.props.info}</li>
     );
   }
 }
 
 module.exports = Card;
 
+/*
+var React = require('react');
+
+class Card extends React.Component{
+  constructor(){
+    super();
+  }
+  render(){
+    console.log(this.props, 'from cards');
+    return(
+      <li className='card'>{this.props.info}</li>
+    );
+  }
+}
+
+module.exports = Card;
+*/
 
 // <div className='card'>
 //   <p className='card__info'>{this.props.info}</p>

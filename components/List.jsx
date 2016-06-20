@@ -7,6 +7,38 @@ class List extends React.Component {
     super();
   }
   render(){
+    /*console.log(this.props, 'from List');*/
+    return(
+      <div className='list'>
+        <h2 className='list__title'>{this.props.title}</h2>
+        <div className='cards__container'>
+          <ul className='cards__list'>
+            {this.props.cardInfo.map(function(card, index){
+              console.log(index, card);
+              return <Card info={card} key={index} />
+            })}
+          </ul>
+        </div>
+        <Input config={this.props} />
+      </div>
+    );
+  }
+}
+
+module.exports = List;
+
+
+  // <Input config={this.props} />
+/*
+var React = require('react');
+var Card = require('./Cards');
+//var Input = require('./InputItem');
+
+class List extends React.Component {
+  constructor(){
+    super();
+  }
+  render(){
     console.log(this.props, 'from List');
     return(
       <div className='list'>
@@ -19,13 +51,16 @@ class List extends React.Component {
             })}
           </ul>
         </div>
-        <Input />  
+        /*<Input config={this.props}/>  */
+/*
       </div>
     );
   }
 }
 
 module.exports = List;
+*/
+
 
 // <Cards cardInfo = {this.props.cardInfo} />
 
