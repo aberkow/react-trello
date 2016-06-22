@@ -5,7 +5,7 @@ class Card extends React.Component{
     super();
   }
   render(){
-    /*console.log(this.props, 'from cards');*/
+    console.log(this.props, 'from cards');
     return(
       <li className='card'>{this.props.info}</li>
     );

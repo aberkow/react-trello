@@ -7,15 +7,13 @@ class Board extends React.Component {
     super();
   }
   render(){
-    /*console.log(this.props, 'from Board');*/
-    console.log(this.props.onClick, 'from board');
     var boardTitle = this.props.config.boardTitle;
     return (
       <div className='board'>
         <h1 className='boardTitle'>{boardTitle}</h1>
         <div className='list__container'>
           {this.props.config.lists.map(function(list, index){
-            console.log(list, 'from map');
+          /*  console.log(list, 'from map'); */
             return <List title={list.listTitle}
               key = {index}
               cardInfo={list.cards}

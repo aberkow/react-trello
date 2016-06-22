@@ -9,29 +9,33 @@ class List extends React.Component {
     this.state = {
       itemText: ''
     }
-    this.onAddClick = this.onAddClick.bind(this);
+    // this.onAddClick = this.onAddClick.bind(this);
     this.onAddInputChanged = this.onAddInputChanged.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
-  onAddClick(evt){
-    evt.preventDefault();
-    var item = evt.target.value;
-    this.handleSubmit(item);
-    console.log('click');
-  }
+  // onAddClick(evt){
+  //   evt.preventDefault();
+  //   //var item = evt.target.value;
+  //   //var item = this.input.value;
+  //   var item = ReactDOM.findDOMNode(this.refs.textInput.value);
+  //
+  //   this.handleSubmit(item);
+  //   console.log(this.textInput, 'from List!');
+  // }
   onAddInputChanged(evt){
     var item = evt.target.value;
     this.setState({itemText: item});
   }
-  handleSubmit(item){
-    console.log('submit');
-    console.log(this.props.cardInfo, 'from handleSubmit');
-    this.props.cardInfo.push(item);
-    console.log(item, 'from handleSubmit');
-  }
+  // handleSubmit(item){
+  //   console.log('submit');
+  //   console.log(this.props.cardInfo, 'from handleSubmit');
+  //   this.props.cardInfo.push(item);
+  //   console.log(item, 'from handleSubmit');
+  //
+  // }
   render(){
     /*console.log(this.props, 'from List');*/
-    console.log(this.props, 'from list');
+    console.log(this.props.config, 'from list');
     return(
       <div className='list'>
         <h2 className='list__title'>{this.props.title}</h2>
@@ -43,7 +47,9 @@ class List extends React.Component {
             })}
           </ul>
         </div>
-        <Input itemText={this.state.itemText} onClick={this.onAddClick} onChange={this.onAddInputChanged} onSubmit={this.handleSubmit}/>
+        <Input config={this.props.cardInfo}  itemText={this.state.item}
+        onChange={this.onAddInputChanged}/>
+
       </div>
     );
   }
@@ -51,6 +57,14 @@ class List extends React.Component {
 
 module.exports = List;
 
+/*
+itemText={this.state.itemText}
+<Input itemText={this.state.itemText}
+  onClick={this.onAddClick}
+  onChange={this.onAddInputChanged}
+  onSubmit={this.handleSubmit}
+  />
+  */
 
   // <Input config={this.props} />
 /*

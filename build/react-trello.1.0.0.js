@@ -20453,8 +20453,6 @@
 	  _createClass(Board, [{
 	    key: 'render',
 	    value: function render() {
-	      /*console.log(this.props, 'from Board');*/
-	      console.log(this.props.onClick, 'from board');
 	      var boardTitle = this.props.config.boardTitle;
 	      return React.createElement(
 	        'div',
@@ -20468,7 +20466,7 @@
 	          'div',
 	          { className: 'list__container' },
 	          this.props.config.lists.map(function (list, index) {
-	            console.log(list, 'from map');
+	            /*  console.log(list, 'from map'); */
 	            return React.createElement(List, { title: list.listTitle,
 	              key: index,
 	              cardInfo: list.cards
@@ -20586,39 +20584,41 @@
 	    _this.state = {
 	      itemText: ''
 	    };
-	    _this.onAddClick = _this.onAddClick.bind(_this);
+	    // this.onAddClick = this.onAddClick.bind(this);
 	    _this.onAddInputChanged = _this.onAddInputChanged.bind(_this);
-	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    // this.handleSubmit = this.handleSubmit.bind(this);
 	    return _this;
 	  }
+	  // onAddClick(evt){
+	  //   evt.preventDefault();
+	  //   //var item = evt.target.value;
+	  //   //var item = this.input.value;
+	  //   var item = ReactDOM.findDOMNode(this.refs.textInput.value);
+	  //
+	  //   this.handleSubmit(item);
+	  //   console.log(this.textInput, 'from List!');
+	  // }
+	
 	
 	  _createClass(List, [{
-	    key: 'onAddClick',
-	    value: function onAddClick(evt) {
-	      evt.preventDefault();
-	      var item = evt.target.value;
-	      this.handleSubmit(item);
-	      console.log('click');
-	    }
-	  }, {
 	    key: 'onAddInputChanged',
 	    value: function onAddInputChanged(evt) {
 	      var item = evt.target.value;
 	      this.setState({ itemText: item });
 	    }
-	  }, {
-	    key: 'handleSubmit',
-	    value: function handleSubmit(item) {
-	      console.log('submit');
-	      console.log(this.props.cardInfo, 'from handleSubmit');
-	      this.props.cardInfo.push(item);
-	      console.log(item, 'from handleSubmit');
-	    }
+	    // handleSubmit(item){
+	    //   console.log('submit');
+	    //   console.log(this.props.cardInfo, 'from handleSubmit');
+	    //   this.props.cardInfo.push(item);
+	    //   console.log(item, 'from handleSubmit');
+	    //
+	    // }
+	
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      /*console.log(this.props, 'from List');*/
-	      console.log(this.props, 'from list');
+	      console.log(this.props.config, 'from list');
 	      return React.createElement(
 	        'div',
 	        { className: 'list' },
@@ -20639,7 +20639,8 @@
 	            })
 	          )
 	        ),
-	        React.createElement(Input, { itemText: this.state.itemText, onClick: this.onAddClick, onChange: this.onAddInputChanged, onSubmit: this.handleSubmit })
+	        React.createElement(Input, { config: this.props.cardInfo, itemText: this.state.item,
+	          onChange: this.onAddInputChanged })
 	      );
 	    }
 	  }]);
@@ -20649,6 +20650,15 @@
 	
 	module.exports = List;
 	
+	/*
+	itemText={this.state.itemText}
+	<Input itemText={this.state.itemText}
+	  onClick={this.onAddClick}
+	  onChange={this.onAddInputChanged}
+	  onSubmit={this.handleSubmit}
+	  />
+	  */
+
 	// <Input config={this.props} />
 	/*
 	var React = require('react');
@@ -20801,7 +20811,7 @@
 	  _createClass(Card, [{
 	    key: 'render',
 	    value: function render() {
-	      /*console.log(this.props, 'from cards');*/
+	      console.log(this.props, 'from cards');
 	      return React.createElement(
 	        'li',
 	        { className: 'card' },
@@ -20881,6 +20891,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(1);
+	//var ReactDOM = require('react-dom');
 	
 	var Input = function (_React$Component) {
 	  _inherits(Input, _React$Component);
@@ -20888,31 +20899,70 @@
 	  function Input(props) {
 	    _classCallCheck(this, Input);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Input).call(this, props));
+	    // this.state = {
+	    //   itemText: ''
+	    // }
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Input).call(this, props));
+	
+	    _this.onAddClick = _this.onAddClick.bind(_this);
+	    //this.onAddInputChanged = this.onAddInputChanged.bind(this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Input, [{
+	    key: 'onAddClick',
+	    value: function onAddClick(evt) {
+	      evt.preventDefault();
+	      //var item = evt.target.value;
+	      //var item = this.input.value;
+	      var item = this.textInput.value;
+	
+	      this.handleSubmit(item);
+	      console.log(this.textInput, 'from List!');
+	    }
+	    // onAddInputChanged(evt){
+	    //   var item = evt.target.value;
+	    //   this.setState({itemText: item});
+	    // }
+	
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(item) {
+	      console.log('submit');
+	      console.log(this.props.config, 'from handleSubmit');
+	      this.props.config.push(item);
+	      console.log(item, 'from handleSubmit');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      /*console.log(this.props, 'from Input');
-	      let { itemText } = this.state;*/
-	
+	      let { itemText } = this.state;
+	      console.log(this.props, 'from Input');*/
 	      return React.createElement(
 	        'div',
 	        { className: 'input' },
 	        React.createElement(
 	          'form',
-	          { className: 'input__form', onSubmit: this.props.handleSubmit },
+	          { className: 'input__form', onSubmit: this.handleSubmit },
 	          React.createElement('input', { type: 'text',
 	            className: 'input__form-box',
 	            placeholder: 'Add a task',
-	            value: this.props.itemText,
-	            onChange: this.props.onChange
+	            onChange: this.onChange,
+	
+	            ref: function (element) {
+	              this.textInput = element;
+	            }.bind(this)
+	
 	          }),
 	          React.createElement('input', { type: 'submit',
 	            className: 'input__form-submit',
-	            onClick: this.props.onClick
-	
+	            onClick: this.onAddClick,
+	            ref: function (element) {
+	              this.submitButton = element;
+	            }.bind(this)
 	          })
 	        )
 	      );
@@ -20925,6 +20975,13 @@
 	module.exports = Input;
 	
 	/*
+	onChange={this.onAddInputChanged}
+
+	value={this.props.itemText}
+
+	ref={function(element){
+	  this.textInput = element;
+	}.bind(this)}
 	value={itemText}
 	var React = require('react');
 
