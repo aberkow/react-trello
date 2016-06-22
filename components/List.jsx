@@ -1,13 +1,37 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Card = require('./Cards');
 var Input = require('./InputItem');
 
 class List extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+    this.state = {
+      itemText: ''
+    }
+    this.onAddClick = this.onAddClick.bind(this);
+    this.onAddInputChanged = this.onAddInputChanged.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  onAddClick(evt){
+    evt.preventDefault();
+    var item = evt.target.value;
+    this.handleSubmit(item);
+    console.log('click');
+  }
+  onAddInputChanged(evt){
+    var item = evt.target.value;
+    this.setState({itemText: item});
+  }
+  handleSubmit(item){
+    console.log('submit');
+    console.log(this.props.cardInfo, 'from handleSubmit');
+    this.props.cardInfo.push(item);
+    console.log(item, 'from handleSubmit');
   }
   render(){
     /*console.log(this.props, 'from List');*/
+    console.log(this.props, 'from list');
     return(
       <div className='list'>
         <h2 className='list__title'>{this.props.title}</h2>
@@ -19,7 +43,7 @@ class List extends React.Component {
             })}
           </ul>
         </div>
-        <Input config={this.props} />
+        <Input itemText={this.state.itemText} onClick={this.onAddClick} onChange={this.onAddInputChanged} onSubmit={this.handleSubmit}/>
       </div>
     );
   }

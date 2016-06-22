@@ -78,29 +78,19 @@
 	  function Container(props) {
 	    _classCallCheck(this, Container);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Container).call(this, props));
-	
-	    _this.state = {
-	      itemText: ' '
-	    };
-	    _this.onAddInputChanged = _this.onAddInputChanged.bind(_this);
-	    _this.onAddClick = _this.onAddClick.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Container).call(this, props));
+	    // this.state = {
+	    //   itemText: '',
+	    // };
+	    //this.onAddInputChanged = this.onAddInputChanged.bind(this);
 	  }
+	  // onAddInputChanged(evt){
+	  //   console.log(this);
+	  //   console.log(evt.target.value);
+	  //   this.setState({itemText: evt.target.value});
+	  // }
 	
 	  _createClass(Container, [{
-	    key: 'onAddInputChanged',
-	    value: function onAddInputChanged(evt) {
-	      console.log(this);
-	      this.setState({ itemText: evt.target.value });
-	    }
-	  }, {
-	    key: 'onAddClick',
-	    value: function onAddClick(evt) {
-	      evt.preventDefault();
-	      console.log('click');
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      console.log(this.state, 'from index');
@@ -117,10 +107,11 @@
 	}(React.Component);
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	  ReactDOM.render(React.createElement(Container, { boardConfig: boardConfig, changeHandler: this.onAddInputChanged, clickHandler: this.onAddClick }), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(Container, { boardConfig: boardConfig }), document.getElementById('app'));
 	});
 	
 	// <Board boardConfig={this.props} /> itemText={this.state.itemText}
+	//changeHandler={this.onAddInputChanged} clickHandler={this.onAddClick}
 
 	/*
 	this.state = {
@@ -20463,6 +20454,7 @@
 	    key: 'render',
 	    value: function render() {
 	      /*console.log(this.props, 'from Board');*/
+	      console.log(this.props.onClick, 'from board');
 	      var boardTitle = this.props.config.boardTitle;
 	      return React.createElement(
 	        'div',
@@ -20476,7 +20468,11 @@
 	          'div',
 	          { className: 'list__container' },
 	          this.props.config.lists.map(function (list, index) {
-	            return React.createElement(List, { title: list.listTitle, key: index, cardInfo: list.cards });
+	            console.log(list, 'from map');
+	            return React.createElement(List, { title: list.listTitle,
+	              key: index,
+	              cardInfo: list.cards
+	            });
 	          })
 	        )
 	      );
@@ -20575,22 +20571,54 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(38);
 	var Card = __webpack_require__(170);
 	var Input = __webpack_require__(171);
 	
 	var List = function (_React$Component) {
 	  _inherits(List, _React$Component);
 	
-	  function List() {
+	  function List(props) {
 	    _classCallCheck(this, List);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(List).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(List).call(this, props));
+	
+	    _this.state = {
+	      itemText: ''
+	    };
+	    _this.onAddClick = _this.onAddClick.bind(_this);
+	    _this.onAddInputChanged = _this.onAddInputChanged.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(List, [{
+	    key: 'onAddClick',
+	    value: function onAddClick(evt) {
+	      evt.preventDefault();
+	      var item = evt.target.value;
+	      this.handleSubmit(item);
+	      console.log('click');
+	    }
+	  }, {
+	    key: 'onAddInputChanged',
+	    value: function onAddInputChanged(evt) {
+	      var item = evt.target.value;
+	      this.setState({ itemText: item });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(item) {
+	      console.log('submit');
+	      console.log(this.props.cardInfo, 'from handleSubmit');
+	      this.props.cardInfo.push(item);
+	      console.log(item, 'from handleSubmit');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      /*console.log(this.props, 'from List');*/
+	      console.log(this.props, 'from list');
 	      return React.createElement(
 	        'div',
 	        { className: 'list' },
@@ -20611,7 +20639,7 @@
 	            })
 	          )
 	        ),
-	        React.createElement(Input, { config: this.props })
+	        React.createElement(Input, { itemText: this.state.itemText, onClick: this.onAddClick, onChange: this.onAddInputChanged, onSubmit: this.handleSubmit })
 	      );
 	    }
 	  }]);
@@ -20857,10 +20885,10 @@
 	var Input = function (_React$Component) {
 	  _inherits(Input, _React$Component);
 	
-	  function Input() {
+	  function Input(props) {
 	    _classCallCheck(this, Input);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Input).call(this));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Input).call(this, props));
 	  }
 	
 	  _createClass(Input, [{
@@ -20868,22 +20896,23 @@
 	    value: function render() {
 	      /*console.log(this.props, 'from Input');
 	      let { itemText } = this.state;*/
+	
 	      return React.createElement(
 	        'div',
 	        { className: 'input' },
 	        React.createElement(
 	          'form',
-	          { className: 'input__form' },
+	          { className: 'input__form', onSubmit: this.props.handleSubmit },
 	          React.createElement('input', { type: 'text',
 	            className: 'input__form-box',
 	            placeholder: 'Add a task',
-	
-	            onChange: this.onAddInputChanged
-	
+	            value: this.props.itemText,
+	            onChange: this.props.onChange
 	          }),
 	          React.createElement('input', { type: 'submit',
 	            className: 'input__form-submit',
-	            onClick: this.onAddClick
+	            onClick: this.props.onClick
+	
 	          })
 	        )
 	      );

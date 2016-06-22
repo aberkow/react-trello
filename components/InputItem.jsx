@@ -1,26 +1,27 @@
 var React = require('react');
 
 class Input extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
   }
 
   render(){
     /*console.log(this.props, 'from Input');
     let { itemText } = this.state;*/
+    
     return(
       <div className='input'>
-        <form className='input__form'>
+        <form className='input__form' onSubmit={this.props.handleSubmit}>
           <input type='text'
             className='input__form-box'
             placeholder='Add a task'
-
-            onChange={this.onAddInputChanged}
-
+            value={this.props.itemText}
+            onChange={this.props.onChange}
             />
           <input type='submit'
             className='input__form-submit'
-            onClick={this.onAddClick}
+            onClick={this.props.onClick}
+
             />
         </form>
       </div>
