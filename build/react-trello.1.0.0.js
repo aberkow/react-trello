@@ -20585,7 +20585,7 @@
 	      itemText: ''
 	    };
 	    // this.onAddClick = this.onAddClick.bind(this);
-	    _this.onAddInputChanged = _this.onAddInputChanged.bind(_this);
+	    // this.onAddInputChanged = this.onAddInputChanged.bind(this);
 	    // this.handleSubmit = this.handleSubmit.bind(this);
 	    return _this;
 	  }
@@ -20598,27 +20598,24 @@
 	  //   this.handleSubmit(item);
 	  //   console.log(this.textInput, 'from List!');
 	  // }
+	  // onAddInputChanged(evt){
+	  //   var item = evt.target.value;
+	  //   this.setState({itemText: item});
+	  // }
+	  // handleSubmit(item){
+	  //   console.log('submit');
+	  //   console.log(this.props.cardInfo, 'from handleSubmit');
+	  //   this.props.cardInfo.push(item);
+	  //   console.log(item, 'from handleSubmit');
+	  //
+	  // }
 	
 	
 	  _createClass(List, [{
-	    key: 'onAddInputChanged',
-	    value: function onAddInputChanged(evt) {
-	      var item = evt.target.value;
-	      this.setState({ itemText: item });
-	    }
-	    // handleSubmit(item){
-	    //   console.log('submit');
-	    //   console.log(this.props.cardInfo, 'from handleSubmit');
-	    //   this.props.cardInfo.push(item);
-	    //   console.log(item, 'from handleSubmit');
-	    //
-	    // }
-	
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      /*console.log(this.props, 'from List');*/
-	      console.log(this.props.config, 'from list');
+	      console.log(this.props, 'from list');
 	      return React.createElement(
 	        'div',
 	        { className: 'list' },
@@ -20639,8 +20636,7 @@
 	            })
 	          )
 	        ),
-	        React.createElement(Input, { config: this.props.cardInfo, itemText: this.state.item,
-	          onChange: this.onAddInputChanged })
+	        React.createElement(Input, { config: this.props.cardInfo, itemText: this.state.itemText })
 	      );
 	    }
 	  }]);
@@ -20651,7 +20647,6 @@
 	module.exports = List;
 	
 	/*
-	itemText={this.state.itemText}
 	<Input itemText={this.state.itemText}
 	  onClick={this.onAddClick}
 	  onChange={this.onAddInputChanged}
@@ -20930,10 +20925,11 @@
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(item) {
-	      console.log('submit');
-	      console.log(this.props.config, 'from handleSubmit');
-	      this.props.config.push(item);
+	      // console.log('submit');
+	
+	      this.props.config.concat(item);
 	      console.log(item, 'from handleSubmit');
+	      console.log(this.props.config, 'from handleSubmit');
 	    }
 	  }, {
 	    key: 'render',

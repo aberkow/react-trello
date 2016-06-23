@@ -25,11 +25,11 @@ class Input extends React.Component{
   //   this.setState({itemText: item});
   // }
   handleSubmit(item){
-    console.log('submit');
-    console.log(this.props.config, 'from handleSubmit');
-    this.props.config.push(item);
+    // console.log('submit');
+    
+    this.props.config.concat(item);
     console.log(item, 'from handleSubmit');
-
+    console.log(this.props.config, 'from handleSubmit');
   }
 
   render(){

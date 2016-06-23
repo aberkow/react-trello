@@ -10,7 +10,7 @@ class List extends React.Component {
       itemText: ''
     }
     // this.onAddClick = this.onAddClick.bind(this);
-    this.onAddInputChanged = this.onAddInputChanged.bind(this);
+    // this.onAddInputChanged = this.onAddInputChanged.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
   // onAddClick(evt){
@@ -22,10 +22,10 @@ class List extends React.Component {
   //   this.handleSubmit(item);
   //   console.log(this.textInput, 'from List!');
   // }
-  onAddInputChanged(evt){
-    var item = evt.target.value;
-    this.setState({itemText: item});
-  }
+  // onAddInputChanged(evt){
+  //   var item = evt.target.value;
+  //   this.setState({itemText: item});
+  // }
   // handleSubmit(item){
   //   console.log('submit');
   //   console.log(this.props.cardInfo, 'from handleSubmit');
@@ -35,7 +35,7 @@ class List extends React.Component {
   // }
   render(){
     /*console.log(this.props, 'from List');*/
-    console.log(this.props.config, 'from list');
+    console.log(this.props, 'from list');
     return(
       <div className='list'>
         <h2 className='list__title'>{this.props.title}</h2>
@@ -47,8 +47,7 @@ class List extends React.Component {
             })}
           </ul>
         </div>
-        <Input config={this.props.cardInfo}  itemText={this.state.item}
-        onChange={this.onAddInputChanged}/>
+        <Input config={this.props.cardInfo} itemText={this.state.itemText} />
 
       </div>
     );
@@ -58,7 +57,6 @@ class List extends React.Component {
 module.exports = List;
 
 /*
-itemText={this.state.itemText}
 <Input itemText={this.state.itemText}
   onClick={this.onAddClick}
   onChange={this.onAddInputChanged}
